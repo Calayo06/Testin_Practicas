@@ -14,10 +14,27 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <div>
-            <div>
-                <div>
-                    
+        <div class="container mt-4 col-lg-4">
+            <div class="card">
+                <div class='card-body text-center'>
+                    <form>
+                        <div class="form-group">
+                            <<h3>Login</h3>
+                            <img src="img/>logo.jpg" alt="70" width="170"/>
+                            <label>Bienvenidos al sistema</label>
+                        </div>
+                        <div class="form-group">
+                            <label>Usuario:</label>
+                            <input type="text" name="txtuser" class="from-control">
+                        </div>
+                        <div class="form-group">
+                            <label>Password:</label>
+                            <input type="text" name="txtpass" class="from-control">
+                            
+                        </div>
+                        <input type="submit" name="accion" value="Ingresar" class="btn btn-primary "
+                        
+                    </form>
                 </div>
             </div>
         </div>
