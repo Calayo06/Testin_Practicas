@@ -16,12 +16,12 @@
     <body>
         <div class="container mt-4 col-lg-4">
             <div class="card">
-                <div class='card-body text-center'>
+                <div class="card-body text-center">
                     <form>
                         <div class="form-group">
-                            <<h3>Login</h3>
-                            <img src="img/>logo.jpg" alt="70" width="170"/>
-                            <label>Bienvenidos al sistema</label>
+                            <h3>Login</h3>
+                            <img src="img/logo.jpg" alt="70" width="170"/>
+                            <label>Bienvenidos al Sistema</label>
                         </div>
                         <div class="form-group">
                             <label>Usuario:</label>
@@ -32,7 +32,7 @@
                             <input type="text" name="txtpass" class="from-control">
                             
                         </div>
-                        <input type="submit" name="accion" value="Ingresar" class="btn btn-primary ">
+                        <input type="submit" name="accion" value="Ingresar" class="btn btn-primary btn-b">
                         
                     </form>
                 </div>
