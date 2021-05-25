@@ -32,7 +32,7 @@
                             <input type="text" name="txtpass" class="from-control">
                             
                         </div>
-                        <input type="submit" name="accion" value="Ingresar" class="btn btn-primary "
+                        <input type="submit" name="accion" value="Ingresar" class="btn btn-primary ">
                         
                     </form>
                 </div>
