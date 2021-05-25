@@ -33,7 +33,7 @@ public class Conexion {
     Connection con;
     String url="jdbc:mysql://127.0.0.1/bd_ventas";
     String user="root";
-    String pass="12345678";
+    String pass="";
     
     public Connection Conexion(){
         try {
