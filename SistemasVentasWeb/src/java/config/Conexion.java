@@ -5,14 +5,14 @@
  */
 package config;
 
-import javax.jms.Connection;
+import java.sql.Connection;
 import java.sql.DriverManager;
 
 /**
  *
  * @author Calayo13
  */
-public class Conexion {
+/*public class Conexion {
     Connection con;
     String url="jdbc:mysql://localhost:3306/bd_ventas";
     String user="root";
@@ -21,9 +21,25 @@ public class Conexion {
     public Connection Conexion(){
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            con = (Connection) DriverManager.getConnection(url,user,pass);
+            con = DriverManager.getConnection(url,user,pass);
         } catch (Exception e) {
             
+        }      
+        return con;
+        
+    }
+}*/
+public class Conexion {
+    Connection con;
+    String url="jdbc:mysql://127.0.0.1/bd_ventas";
+    String user="root";
+    String pass="12345678";
+    
+    public Connection Conexion(){
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            con=DriverManager.getConnection(url,user,pass);
+        } catch (Exception e) {
         }      
         return con;
         
