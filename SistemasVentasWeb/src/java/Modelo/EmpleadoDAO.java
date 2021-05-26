@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Modelo;
 import config.Conexion;
 import java.sql.Connection;
@@ -22,6 +17,24 @@ public class EmpleadoDAO {
     ResultSet rs;
     int r;
     
+    public Cliente bucar(String dni){
+        Cliente c=new Cliente();
+        String sql="Select * from cliente where Dni= "+dni;
+        try{
+            con=cn.Conexion();
+            ps=con.prepareStatement(sql);
+            rs=ps.executeQuery();
+            while (rs.next()){
+                c.setId(rs.getInt(1));
+                c.setDni(rs.getString(2));
+                c.setNom(rs.getString(3));
+                c.setDir(rs.getString(4));
+                c.setEs(rs.getString(5));
+            }
+        } catch (Exception e) { 
+        }
+        return c;
+    }
     public Empleado validar (String user, String dni){
         Empleado em = new Empleado();
         String sql = "select * from empleado where User=? and Dni=?";

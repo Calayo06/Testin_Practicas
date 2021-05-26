@@ -1,14 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Controlador;
 
 import Modelo.Empleado;
 import Modelo.EmpleadoDAO;
+import Modelo.Venta;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -21,18 +18,27 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class Controlador extends HttpServlet {
 
-     Empleado em = new Empleado();
-     EmpleadoDAO edao=new EmpleadoDAO();
-     int ide;
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+    Empleado em = new Empleado();
+    EmpleadoDAO edao=new EmpleadoDAO();
+    Cliente c = new Cliente();
+    ClienteDAO cdao = new ClienteDAO();
+    Producto p = new Producto();
+    ProductoDAO pdao = new ProductoDAO(); 
+     
+    int ide;
+    int idc;
+    int idp;
+     
+    Venta v = new Venta();
+    List<Venta>lista = new ArrayList<>();
+    int item;
+    int cod;
+    String descripcion;
+    double precio;
+    int cant;
+    double subtotal;
+    double totalPagar;
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String menu=request.getParameter("menu");
@@ -101,48 +107,66 @@ public class Controlador extends HttpServlet {
             request.getRequestDispatcher("Clientes.jsp").forward(request, response);
         }
         if(menu.equals("Producto")){
-            request.getRequestDispatcher("Productos.jsp").forward(request, response);
+            request.getRequestDispatcher("Producto.jsp").forward(request, response);
         }
         if(menu.equals("NuevaVenta")){
+            switch(accion){
+                case "BuscarCliente":
+                    String dni= request.getParameter("Codigocliente");
+                    c.setDni(dni);
+                    c = cdao.buscar(dni);
+                    request.setAttribute("c", c);
+                    break;
+                case "BuscarProducto":
+                    int id = Integer.parseInt(request.getParameter("codigoproducto"));
+                    p=pdao.listarId(id);
+                    request.setAttribute("producto", p);
+                    request.setAttribute("lista", lista);
+                    break;
+                case "Agregar":
+                    totalPagar =0.0;
+                    item = item + 1;
+                    cod=p.getId();
+                    descripcion=request.getParameter("nomproducto");
+                    precio=Double.parseDouble(request.getParameter("precio"));
+                    cant=Integer.parseInt(request.getParameter("cant"));
+                    subtotal=precio*cant;
+                    v = new Venta();
+                    v.setItem(item);
+                    v.setId(cod);
+                    v.setDescripcionP(descripcion);
+                    v.setPrecio(precio);
+                    v.setCantidad(cant);
+                    v.setSubtotal(subtotal);
+                    lista.add(v);
+                    for (int i=0; i< lista.size(); i++){
+                        totalPagar=totalPagar +lista.get(i).getSubtotal();	
+                    }
+                    request.setAttribute("totalpagar", totalPagar);
+                    request.setAttribute("lista", lista);
+                    break;
+
+                default:
+                    throw new AssertionError();
+            }
             request.getRequestDispatcher("RegistrarVenta.jsp").forward(request, response);
         }
           
         }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }
 
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }
 
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
     @Override
     public String getServletInfo() {
         return "Short description";
