@@ -21,6 +21,7 @@ public class Empleado {
     }
 
     //probando git 
+    //probando git bruno
     
     public Empleado(int id, String dni, String nom, String tel, String estado, String user) {
         this.id = id;
