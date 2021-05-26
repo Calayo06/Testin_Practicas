@@ -7,7 +7,9 @@
 /**
  *
  * @author Guillermo Alosilla
- */package config;
+ */
+//se modifico
+package config;
 public class GenerarSerie {
     int dato;
     String numero;
