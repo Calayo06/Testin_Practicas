@@ -8,6 +8,7 @@ package config;
 import java.sql.Connection;
 import java.sql.DriverManager;
 
+
 /**
  *
  * @author Calayo13
@@ -31,7 +32,7 @@ import java.sql.DriverManager;
 }*/
 public class Conexion {
     Connection con;
-    String url="jdbc:mysql://127.0.0.1/bd_ventas";
+    String url="jdbc:mysql://localhost/bd_ventas";
     String user="root";
     String pass="";
     
