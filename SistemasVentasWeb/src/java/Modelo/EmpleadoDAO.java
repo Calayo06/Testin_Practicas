@@ -8,7 +8,7 @@ import java.util.List;
 
 /**
  *
- * @author Calayo13
+ * @author Guillermo Alosilla
  */
 public class EmpleadoDAO {
     Conexion cn =  new Conexion();

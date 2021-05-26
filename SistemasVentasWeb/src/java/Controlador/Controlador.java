@@ -1,12 +1,17 @@
 package Controlador;
 
+//Controlador.java
+
 import Modelo.Empleado;
 import Modelo.EmpleadoDAO;
 import Modelo.Venta;
+import Modelo.VentaDAO;
+import config.GenerarSerie;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -15,6 +20,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  *
  * @author Calayo13
+ * Guillermo alosilla edito clase controlador 
  */
 public class Controlador extends HttpServlet {
 
@@ -38,6 +44,9 @@ public class Controlador extends HttpServlet {
     int cant;
     double subtotal;
     double totalPagar;
+    
+    String numeroserie;
+    VentaDAO vdao=new VentaDAO();
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -120,10 +129,13 @@ public class Controlador extends HttpServlet {
                 case "BuscarProducto":
                     int id = Integer.parseInt(request.getParameter("codigoproducto"));
                     p=pdao.listarId(id);
+                    request.setAttribute("c", c);
                     request.setAttribute("producto", p);
                     request.setAttribute("lista", lista);
+                    request.setAttribute("totalpagar", totalPagar);
                     break;
                 case "Agregar":
+                    request.setAttribute("c", c);
                     totalPagar =0.0;
                     item = item + 1;
                     cod=p.getId();
@@ -147,7 +159,20 @@ public class Controlador extends HttpServlet {
                     break;
 
                 default:
-                    throw new AssertionError();
+                    numeroserie = vdao.GenerarSerie();
+                    if(numeroserie==null){
+                        numeroserie="00000001";
+                        request.setAttribute("nserie", numeroserie);
+                    }
+                    else{
+                        int incrementar = Integer.parseInt(numeroserie);
+                        GenerarSerie gs=new GenerarSerie();
+                        numeroserie=gs.NumeroSerie(incrementar);
+                        request.setAttribute("nserie", numeroserie);
+                        
+                    }
+                    request.getRequestDispatcher("RegistrarVenta.jsp").forward(request, response);
+                    
             }
             request.getRequestDispatcher("RegistrarVenta.jsp").forward(request, response);
         }

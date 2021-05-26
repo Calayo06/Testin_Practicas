@@ -60,7 +60,7 @@
                     <div class="card-body">
                         <div class="d-flex col-sm-6 ml-auto">
                             <label>NumeroSerie</label>
-                            <input type="text" name="NroSerie" class="form-control">
+                            <input type="text" name="NroSerie" value="${nserie}" class="form-control">
                         </div>
                         <br>
                         <table class="table table-hover">
@@ -99,7 +99,7 @@
                             
                         </div>
                         <div class="col-sm-3 ml-auto">
-                            <input type="text" name="txtTotal" value="${totalPagar}" class="form-control">
+                            <input type="text" name="txtTotal" value="S/. ${totalPagar}0" class="form-control">
                         </div>
                     </div>
                 </div>
