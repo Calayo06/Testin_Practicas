@@ -20,6 +20,7 @@ public class Empleado {
     public Empleado() {
     }
 
+    //probando git 
     
     public Empleado(int id, String dni, String nom, String tel, String estado, String user) {
         this.id = id;
